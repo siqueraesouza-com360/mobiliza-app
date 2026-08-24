@@ -1,0 +1,26 @@
+{
+  "campanha-2026": {
+    "title": "Campanha 2026",
+    "description": "Apoie nossa campanha! Escolha o formato desejado abaixo:",
+    "masks": [
+      {
+        "id": "mask-perfil",
+        "name": "Para Foto de Perfil (Quadrado)",
+        "url": "masks/perfil.png",
+        "aspectRatio": "1:1"
+      },
+      {
+        "id": "mask-feed",
+        "name": "Para Feed (Vertical)",
+        "url": "masks/feed.png",
+        "aspectRatio": "4:5"
+      },
+      {
+        "id": "mask-stories",
+        "name": "Para Stories / Reels",
+        "url": "masks/stories.png",
+        "aspectRatio": "9:16"
+      }
+    ]
+  }
+}
