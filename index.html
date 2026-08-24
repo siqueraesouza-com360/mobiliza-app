@@ -41,6 +41,12 @@
 </div>
 
 <div class="container">
+  <!-- BANNER TOPO -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    <!-- Substitua "banner.png" pelo nome do arquivo do seu banner que estiver na mesma pasta -->
+    <img src="banner.png" alt="Banner" style="width: 100%; border-radius: 12px; max-height: 250px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" onerror="this.style.display='none'">
+  </div>
+
   <!-- TELA DE ESCOLHA DE CAMPANHAS (Quando não há ?c= na URL) -->
   <div id="campaigns-home" class="card hidden">
     <h2>Escolha uma Campanha</h2>
@@ -116,6 +122,11 @@
   }
 
   function goHome() {
+    const campaigns = Object.keys(campaignsData);
+    if (campaigns.length === 1) {
+      // Se só tem 1, não tem tela "Home" de campanhas para voltar. Mantém na tela de máscaras.
+      return;
+    }
     window.history.pushState({}, '', window.location.pathname);
     showCampaignsList();
   }
@@ -124,7 +135,15 @@
     const list = document.getElementById('campaigns-list');
     list.innerHTML = '';
     
-    Object.keys(campaignsData).forEach(id => {
+    const campaigns = Object.keys(campaignsData);
+    
+    if (campaigns.length === 1) {
+      // Se tiver apenas 1 campanha, já pula direto para a tela de escolha de máscaras
+      loadCampaign(campaigns[0]);
+      return;
+    }
+    
+    campaigns.forEach(id => {
       const camp = campaignsData[id];
       const card = document.createElement('div');
       card.className = 'mask-card';
@@ -145,6 +164,14 @@
     
     document.getElementById('public-title').innerText = campaign.title;
     document.getElementById('public-subtitle').innerText = campaign.description;
+    
+    // Ocultar botão voltar se houver apenas 1 campanha
+    const btnVoltar = document.querySelector('#masks-home .btn-secondary');
+    if (Object.keys(campaignsData).length === 1) {
+      btnVoltar.style.display = 'none';
+    } else {
+      btnVoltar.style.display = 'inline-block';
+    }
     
     const gallery = document.getElementById('masks-gallery');
     gallery.innerHTML = '';
