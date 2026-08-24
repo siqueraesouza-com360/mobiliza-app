@@ -36,10 +36,6 @@
 </head>
 <body>
 
-<div class="navbar">
-  <h1>📸 Mobilização</h1>
-</div>
-
 <div class="container">
   <!-- BANNER TOPO -->
   <div style="text-align: center; margin-bottom: 20px;">
@@ -192,6 +188,9 @@
     selectedMask = mask;
     selectedMaskImage = new Image();
     selectedMaskImage.crossOrigin = "anonymous";
+    selectedMaskImage.onerror = () => {
+      alert("⚠️ Erro: Não foi possível carregar a imagem da máscara (" + mask.url + "). Verifique se o arquivo existe com esse nome exato no seu GitHub.");
+    };
     selectedMaskImage.src = mask.url;
     
     document.getElementById('selected-mask-name').innerText = "Máscara: " + mask.name;
